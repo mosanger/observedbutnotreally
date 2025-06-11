@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observations of an Absent Mind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Raleway', sans-serif;
+        }
+        .font-serif-elegant {
+            font-family: 'Playfair Display', serif;
+        }
+        .cover-wrapper {
+            min-height: 95vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .cover-image-container {
+            flex-grow: 1;
+            background-color: #ffffff; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .cover-title-container {
+            padding: 4vh 5vw;
+            text-align: center;
+        }
+        .portfolio-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 5vh 5vw;
+            gap: 30px; 
+        }
+        .quote-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 5vw;
+            text-align: center;
+        }
+        .image-container {
+            width: 75%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.3s ease-in-out; /* Smooth transition */
+        }
+        .text-container {
+            width: 25%;
+            flex-shrink: 0;
+            transition: width 0.3s ease-in-out; /* Smooth transition */
+        }
+        .page-right .image-container {
+            order: 2;
+        }
+        .page-right .text-container {
+            order: 1;
+            text-align: right; 
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            max-height: 90vh;
+        }
+        @media (max-width: 768px) {
+            .portfolio-page {
+                flex-direction: column !important; 
+            }
+            .page-right .image-container,
+            .portfolio-page .image-container,
+            .image-container {
+                 order: 1 !important;
+                 width: 100% !important;
+            }
+            .page-right .text-container,
+            .portfolio-page .text-container,
+            .text-container {
+                order: 2 !important;
+                width: 100% !important;
+                padding-top: 2rem !important;
+                text-align: left !important;
+            }
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4b5563; /* gray-600 */
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .social-link:hover {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Section -->
+    <section class="cover-wrapper">
+        <div class="cover-image-container">
+            <img 
+                src="https://farm2.static.flickr.com/1337/1146752357_e45686f734_o.jpg" 
+                class="cover-image" 
+                alt="A large crowd of people at an outdoor concert."
+                onerror="this.onerror=null;this.style.display='none'">
+        </div>
+        <div class="cover-title-container">
+            <h1 class="font-serif-elegant text-3xl md:text-5xl font-medium">Observations of an Absent Mind</h1>
+            <p class="text-sm md:text-lg mt-3">Or How to Turn Random Pictures of Your Past into a Vaguely Coherent Story in Five Acts</p>
+        </div>
+    </section>
+
+    <!-- Quote Page -->
+    <section class="quote-page">
+        <div class="text-center">
+            <p class="font-serif-elegant text-lg md:text-xl leading-relaxed max-w-xl">observed moments, reconstructed. unreliable at best, improbable at worst. in progress.</p>
+            <div class="mt-8">
+                <a href="https://www.instagram.com/observedbutnotreally" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 1 -->
+    <section class="portfolio-page">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/89/237949527_532d744417_o.jpg" alt="A blurry, long-exposure shot of a person walking on a city sidewalk at night, with light trails from cars." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Marla</h2>
+            <p class="text-sm md:text-base leading-relaxed">sometimes, marla throws garbage out the window.</p>
+        </div>
+    </section>
+    
+    <!-- Page 2 -->
+    <section class="portfolio-page page-right">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/82/237949826_bfc275e844_o.jpg" alt="A candid black and white photo of a man sitting at a table looking off to the side." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Hans</h2>
+            <p class="text-sm md:text-base leading-relaxed">i can't remember what's special about hans. he's a quiet one.</p>
+        </div>
+    </section>
+
+    <!-- Page 3 -->
+    <section class="portfolio-page">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/110/276513132_a2876901f9_o.jpg" alt="A woman with dark hair looks over her shoulder with a concerned expression." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Jessy</h2>
+            <p class="text-sm md:text-base leading-relaxed">who's like totally freaked out about the guy with the camera behind her back. tri-x</p>
+        </div>
+    </section>
+
+    <!-- Page 4 -->
+    <section class="portfolio-page page-right">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/99/298356238_8f27dcc818_o.jpg" alt="An abandoned shopping cart sits alone on a sidewalk." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Unnamed object</h2>
+            <p class="text-sm md:text-base leading-relaxed">a sick-of-shopping shopping cart</p>
+        </div>
+    </section>
+
+    <!-- Page 5 -->
+    <section class="portfolio-page">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/220/454672129_6157935de3_o.jpg" alt="A person with voluminous, styled hair seen from behind." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gerti</h2>
+            <p class="text-sm md:text-base leading-relaxed">still undefeated in the category best hair of the year. meticulous as usual.</p>
+        </div>
+    </section>
+
+    <!-- Page 6 -->
+    <section class="portfolio-page page-right">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/2152/2022161605_48575d4f8e_o.jpg" alt="Two men sitting together, laughing." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Randy</h2>
+            <p class="text-sm md:text-base leading-relaxed">still unsure if randy and pumuckl are laughing about the same thing but the thought of it calms me.</p>
+        </div>
+    </section>
+
+    <!-- Page 7 -->
+    <section class="portfolio-page">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/3069/2639257057_fde1d36a28_o.jpg" alt="A woman in a decorative hat sitting on a couch." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Debbie</h2>
+            <p class="text-sm md:text-base leading-relaxed">Hmm. Crochet?<br/>Sounds so up my couch. I hate her guts but I might just do it secretly and still hate on it after church.</p>
+        </div>
+    </section>
+
+    <!-- Page 8 -->
+    <section class="portfolio-page page-right">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/3234/2675125415_d459a7c5df_o.jpg" alt="A child holding white balloons stands next to an older man." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Bob and Bob jr</h2>
+            <p class="text-sm md:text-base leading-relaxed">sadly, one day little bob will lose his love for balloons and will immediately look exactly like old bob.</p>
+        </div>
+    </section>
+
+    <!-- Page 9 -->
+    <section class="portfolio-page">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/3144/2675127857_969efda2ff_o.jpg" alt="A person with a unique hat and checkered pattern, standing behind a crowd barrier." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">[Name unknown]</h2>
+            <p class="text-sm md:text-base leading-relaxed">she's probably still unaware but these are the heroes we need, undefinable, in their own mysterious box, imaginably capable, and ever evolving. lesbian (or lesbian reading - both cool), femme, butch, ready to touch down and document their success. plus, practically immune against a sun-stroke. name not known as of printing, any tips are highly appreciated.</p>
+        </div>
+    </section>
+
+    <!-- Page 10 -->
+    <section class="portfolio-page page-right">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/65535/54581831523_526132f1d8_o.jpg" alt="A person sitting at a small table on a gray, empty plaza." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Tatjana</h2>
+            <p class="text-sm md:text-base leading-relaxed">she could have definitely chosen a more optimal location for her refreshment stand but she like it quiet and gray. theres's on average one lost tourist and a few guys in suits everyday. And those pay really well if you start trauma dumping.</p>
+        </div>
+    </section>
+
+    <!-- Page 11 -->
+    <section class="portfolio-page">
+        <div class="image-container">
+            <img src="https://live.staticflickr.com/2145/2099531092_a11195e653_c.jpg" alt="A man looks out a window, his reflection visible in the glass." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+        </div>
+        <div class="text-container">
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Markus</h2>
+            <p class="text-sm md:text-base leading-relaxed">observing.</p>
+            <div class="mt-8 flex flex-row space-x-4">
+                <a href="https://www.instagram.com/mosanger" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="mailto:mosanger@gmail.com" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // This script runs after the page has loaded
+        window.addEventListener('load', () => {
+            const portfolioPages = document.querySelectorAll('.portfolio-page');
+            const adjustLayout = (img) => {
+                const imageContainer = img.closest('.image-container');
+                if (!imageContainer) return;
+                const textContainer = imageContainer.parentElement.querySelector('.text-container');
+                if (!textContainer) return;
+                const isPortrait = img.naturalHeight > img.naturalWidth;
+                if (isPortrait) {
+                    imageContainer.style.width = '50%';
+                    textContainer.style.width = '50%';
+                }
+            };
+            portfolioPages.forEach(page => {
+                const img = page.querySelector('img');
+                if (img) {
+                    if (img.complete) {
+                        adjustLayout(img);
+                    } else {
+                        img.addEventListener('load', () => adjustLayout(img));
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
