@@ -79,23 +79,24 @@
             object-fit: contain;
             max-height: 90vh;
         }
+        /* Responsive styles for screens smaller than 768px (tablets and phones) */
         @media (max-width: 768px) {
             .portfolio-page {
-                flex-direction: column !important; 
+                flex-direction: column; 
             }
             .page-right .image-container,
             .portfolio-page .image-container,
             .image-container {
-                 order: 1 !important;
-                 width: 100% !important;
+                 order: 1;
+                 width: 100%;
             }
             .page-right .text-container,
             .portfolio-page .text-container,
             .text-container {
-                order: 2 !important;
-                width: 100% !important;
-                padding-top: 2rem !important;
-                text-align: left !important;
+                order: 2;
+                width: 100%;
+                padding-top: 2rem;
+                text-align: left;
             }
         }
         .social-link {
@@ -270,31 +271,53 @@
     </section>
 
     <script>
-        // This script runs after the page has loaded
-        window.addEventListener('load', () => {
+        // This script adjusts layout based on image orientation for desktop view.
+        const adjustAllLayouts = () => {
             const portfolioPages = document.querySelectorAll('.portfolio-page');
-            const adjustLayout = (img) => {
-                const imageContainer = img.closest('.image-container');
-                if (!imageContainer) return;
-                const textContainer = imageContainer.parentElement.querySelector('.text-container');
-                if (!textContainer) return;
-                const isPortrait = img.naturalHeight > img.naturalWidth;
-                if (isPortrait) {
-                    imageContainer.style.width = '50%';
-                    textContainer.style.width = '50%';
-                }
-            };
+            const breakpoint = 768; // Corresponds to md: breakpoint in Tailwind
+
             portfolioPages.forEach(page => {
+                const imageContainer = page.querySelector('.image-container');
+                const textContainer = page.querySelector('.text-container');
                 const img = page.querySelector('img');
-                if (img) {
-                    if (img.complete) {
-                        adjustLayout(img);
+
+                if (!imageContainer || !textContainer || !img) {
+                    return;
+                }
+
+                // If we are on a mobile-sized screen, clear inline styles and let CSS media queries take over.
+                if (window.innerWidth <= breakpoint) {
+                    imageContainer.style.width = '';
+                    textContainer.style.width = '';
+                    return;
+                }
+
+                // On desktop, adjust layout based on image aspect ratio.
+                const adjustForOrientation = () => {
+                    const isPortrait = img.naturalHeight > img.naturalWidth;
+                    if (isPortrait) {
+                        imageContainer.style.width = '50%';
+                        textContainer.style.width = '50%';
                     } else {
-                        img.addEventListener('load', () => adjustLayout(img));
+                        // Explicitly set the default landscape/square layout for desktop
+                        imageContainer.style.width = '75%';
+                        textContainer.style.width = '25%';
                     }
+                };
+
+                // Check if the image has finished loading to get its dimensions.
+                if (img.complete && img.naturalHeight > 0) {
+                    adjustForOrientation();
+                } else {
+                    // If not loaded, wait for the load event before adjusting.
+                    img.addEventListener('load', adjustForOrientation, { once: true });
                 }
             });
-        });
+        };
+
+        // Run the layout adjustment after the initial page load and on window resize.
+        window.addEventListener('load', adjustAllLayouts);
+        window.addEventListener('resize', adjustAllLayouts);
     </script>
 
 </body>
