@@ -18,7 +18,7 @@
             font-family: 'Playfair Display', serif;
         }
         .cover-wrapper {
-            min-height: 95vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -27,16 +27,18 @@
             background-color: #ffffff; 
             display: flex; 
             align-items: center; 
-            justify-content: center; 
+            justify-content: center;
+            overflow: hidden;
         }
         .cover-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: contain; /* Changed back to contain to prevent cropping */
         }
         .cover-title-container {
             padding: 4vh 5vw;
             text-align: center;
+            transform: translateY(-20px); /* Moves the container up */
         }
         .portfolio-page {
             min-height: 100vh;
@@ -148,7 +150,7 @@
         </div>
         <div class="text-container">
             <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Marla</h2>
-            <p class="text-sm md:text-base leading-relaxed">sometimes, marla throws garbage out the window.</p>
+            <p class="text-sm md:text-base leading-relaxed">sometimes, marla throws biodegradable garbage out the window.</p>
         </div>
     </section>
     
@@ -202,8 +204,8 @@
             <img src="https://live.staticflickr.com/2152/2022161605_48575d4f8e_o.jpg" alt="Two men sitting together, laughing." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Randy</h2>
-            <p class="text-sm md:text-base leading-relaxed">still unsure if randy and pumuckl are laughing about the same thing but the thought of it calms me.</p>
+            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Reinhard</h2>
+            <p class="text-sm md:text-base leading-relaxed">still unsure if reinhard and pumuckl are laughing about the same thing but the thought of it calms me.</p>
         </div>
     </section>
 
