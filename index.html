@@ -1,543 +1,824 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Observations of an Absent Mind</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            background-color: #ffffff;
-            color: #000000;
-            font-family: 'Raleway', sans-serif;
-        }
-        .font-serif-elegant {
-            font-family: 'Playfair Display', serif;
-        }
-        .cover-wrapper {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .cover-image-container {
-            flex-grow: 1;
-            background-color: #ffffff; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            overflow: hidden;
-        }
-        .cover-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Changed back to contain to prevent cropping */
-        }
-        .cover-title-container {
-            padding: 4vh 5vw;
-            text-align: center;
-            transform: translateY(-20px); /* Moves the container up */
-        }
-        .portfolio-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 5vh 5vw;
-            gap: 30px; 
-        }
-        .quote-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5vh 5vw;
-            text-align: center;
-        }
-        .image-container {
-            width: 75%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: width 0.3s ease-in-out; /* Smooth transition */
-        }
-        .text-container {
-            width: 25%;
-            flex-shrink: 0;
-            transition: width 0.3s ease-in-out; /* Smooth transition */
-        }
-        /* Caption text pulled from picture metadata may contain newlines */
-        .text-container p {
-            white-space: pre-line;
-        }
-        /* Left/right alternation driven by CSS even/odd — no manual classes needed.
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        font-family: "Raleway", sans-serif;
+      }
+      .font-serif-elegant {
+        font-family: "Playfair Display", serif;
+      }
+      .cover-wrapper {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .cover-image-container {
+        flex-grow: 1;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Changed back to contain to prevent cropping */
+      }
+      .cover-title-container {
+        padding: 4vh 5vw;
+        text-align: center;
+        transform: translateY(-20px); /* Moves the container up */
+      }
+      .portfolio-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 5vh 5vw;
+        gap: 30px;
+      }
+      .quote-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5vh 5vw;
+        text-align: center;
+      }
+      .image-container {
+        width: 75%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: width 0.3s ease-in-out; /* Smooth transition */
+      }
+      .text-container {
+        width: 25%;
+        flex-shrink: 0;
+        transition: width 0.3s ease-in-out; /* Smooth transition */
+      }
+      /* Caption text pulled from picture metadata may contain newlines */
+      .text-container p {
+        white-space: pre-line;
+      }
+      /* Left/right alternation driven by CSS even/odd — no manual classes needed.
            Only applies on desktop; mobile stacks image over text regardless. */
-        @media (min-width: 769px) {
-            .portfolio-pages .portfolio-page:nth-child(odd) .image-container {
-                order: 1;
-            }
-            .portfolio-pages .portfolio-page:nth-child(odd) .text-container {
-                order: 2;
-                text-align: left;
-            }
-            .portfolio-pages .portfolio-page:nth-child(even) .image-container {
-                order: 2;
-            }
-            .portfolio-pages .portfolio-page:nth-child(even) .text-container {
-                order: 1;
-                text-align: right;
-            }
+      @media (min-width: 769px) {
+        .portfolio-pages .portfolio-page:nth-child(odd) .image-container {
+          order: 1;
         }
-        .image-container img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            max-height: 90vh;
+        .portfolio-pages .portfolio-page:nth-child(odd) .text-container {
+          order: 2;
+          text-align: left;
         }
-        /* Responsive styles for screens smaller than 768px (tablets and phones) */
-        @media (max-width: 768px) {
-            .portfolio-page {
-                flex-direction: column; 
-            }
-            .portfolio-pages .image-container {
-                 order: 1;
-                 width: 100%;
-            }
-            .portfolio-pages .text-container {
-                order: 2;
-                width: 100%;
-                padding-top: 2rem;
-                text-align: left;
-            }
+        .portfolio-pages .portfolio-page:nth-child(even) .image-container {
+          order: 2;
         }
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #4b5563; /* gray-600 */
-            transition: color 0.2s;
-            text-decoration: none;
+        .portfolio-pages .portfolio-page:nth-child(even) .text-container {
+          order: 1;
+          text-align: right;
         }
-        .social-link:hover {
-            color: #000000;
+      }
+      .image-container img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        max-height: 90vh;
+      }
+      /* Responsive styles for screens smaller than 768px (tablets and phones) */
+      @media (max-width: 768px) {
+        .portfolio-page {
+          flex-direction: column;
         }
+        .portfolio-pages .image-container {
+          order: 1;
+          width: 100%;
+        }
+        .portfolio-pages .text-container {
+          order: 2;
+          width: 100%;
+          padding-top: 2rem;
+          text-align: left;
+        }
+      }
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #4b5563; /* gray-600 */
+        transition: color 0.2s;
+        text-decoration: none;
+      }
+      .social-link:hover {
+        color: #000000;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- Cover Section -->
     <section class="cover-wrapper">
-        <div class="cover-image-container">
-            <img 
-                src="images/cover.jpg" 
-                class="cover-image" 
-                alt="A large crowd of people at an outdoor concert."
-                onerror="this.onerror=null;this.style.display='none'">
-        </div>
-        <div class="cover-title-container">
-            <h1 class="font-serif-elegant text-3xl md:text-5xl font-medium">Observations of an Absent Mind</h1>
-            <p class="text-sm md:text-lg mt-3">Or How to Turn Random Pictures of Your Past into a Vaguely Coherent Story in Five Acts</p>
-        </div>
+      <div class="cover-image-container">
+        <img
+          src="images/cover.jpg"
+          class="cover-image"
+          alt="A large crowd of people at an outdoor concert."
+          onerror="
+            this.onerror = null;
+            this.style.display = 'none';
+          "
+        />
+      </div>
+      <div class="cover-title-container">
+        <h1 class="font-serif-elegant text-3xl md:text-5xl font-medium">Observations of an Absent Mind</h1>
+        <!-- <p class="text-sm md:text-lg mt-3">Or How to Turn Random Pictures of Your Past into a Vaguely Coherent Story in Five Acts</p> -->
+      </div>
     </section>
 
     <!-- Quote Page -->
     <section class="quote-page">
-        <div class="text-center">
-            <p class="font-serif-elegant text-lg md:text-xl leading-relaxed max-w-xl">observed moments, reconstructed. unreliable at best, improbable at worst. in progress.</p>
-            <div class="mt-8">
-                <a href="https://www.instagram.com/observedbutnotreally" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
-            </div>
+      <div class="text-center">
+        <p class="font-serif-elegant text-lg md:text-xl leading-relaxed max-w-xl">
+          observed moments, reconstructed. unreliable at best, improbable at worst. in progress.
+        </p>
+        <div class="mt-8">
+          <a
+            href="https://www.instagram.com/observedbutnotreally"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
         </div>
+      </div>
     </section>
 
     <main class="portfolio-pages">
-
-    <!-- image-01 -->
-    <section class="portfolio-page">
+      <!-- image-01 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-01.jpg" alt="Marlene" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-01.jpg"
+            alt="Marlene"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Marlene</h2>
-            <p class="text-sm md:text-base leading-relaxed">friends secretly think she only skims the weekly book.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Marlene</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            friends secretly think she only skims the weekly book.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-02 -->
-    <section class="portfolio-page">
+      <!-- image-02 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-02.jpg" alt="Marla" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-02.jpg"
+            alt="Marla"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Marla</h2>
-            <p class="text-sm md:text-base leading-relaxed">sometimes, marla throws biodegradable garbage out the window.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Marla</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            sometimes, marla throws biodegradable garbage out the window.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-03 -->
-    <section class="portfolio-page">
+      <!-- image-03 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-03.jpg" alt="Oliver" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-03.jpg"
+            alt="Oliver"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Oliver</h2>
-            <p class="text-sm md:text-base leading-relaxed">collects vintage radios. has exactly 391 of them. still does daily inventory.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Oliver</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            collects vintage radios. has exactly 391 of them. still does daily inventory.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-04 -->
-    <section class="portfolio-page">
+      <!-- image-04 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-04.jpg" alt="Reinhard" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-04.jpg"
+            alt="Reinhard"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Reinhard</h2>
-            <p class="text-sm md:text-base leading-relaxed">still unsure if reinhard and pumuckl are laughing about the same thing but the thought of it calms me.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Reinhard</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            still unsure if reinhard and pumuckl are laughing about the same thing but the thought of it calms
+            me.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-05 -->
-    <section class="portfolio-page">
+      <!-- image-05 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-05.jpg" alt="Paula" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-05.jpg"
+            alt="Paula"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Paula</h2>
-            <p class="text-sm md:text-base leading-relaxed">would find this aisle blindfolded, yet nobody would be able to tell.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Paula</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            would find this aisle blindfolded, yet nobody would be able to tell.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-06 -->
-    <section class="portfolio-page">
+      <!-- image-06 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-06.jpg" alt="Jessy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-06.jpg"
+            alt="Jessy"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Jessy</h2>
-            <p class="text-sm md:text-base leading-relaxed">who's like totally freaked out about the guy with the camera behind her back.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Jessy</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            who's like totally freaked out about the guy with the camera behind her back.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-07 -->
-    <section class="portfolio-page">
+      <!-- image-07 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-07.jpg" alt="Unnamed object" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-07.jpg"
+            alt="Unnamed object"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Unnamed object</h2>
-            <p class="text-sm md:text-base leading-relaxed">a sick-of-shopping shopping cart.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Unnamed object</h2>
+          <p class="text-sm md:text-base leading-relaxed">a sick-of-shopping shopping cart.</p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-08 -->
-    <section class="portfolio-page">
+      <!-- image-08 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-08.jpg" alt="Michael" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-08.jpg"
+            alt="Michael"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Michael</h2>
-            <p class="text-sm md:text-base leading-relaxed">britney's toxic on repeat for 20 minutes straight, and it still slaps HARD.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Michael</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            britney's toxic on repeat for 20 minutes straight, and it still slaps HARD.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-09 -->
-    <section class="portfolio-page">
+      <!-- image-09 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-09.jpg" alt="Gerard" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-09.jpg"
+            alt="Gerard"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gerard</h2>
-            <p class="text-sm md:text-base leading-relaxed">perpetually late. acts like you're early.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gerard</h2>
+          <p class="text-sm md:text-base leading-relaxed">perpetually late. acts like you're early.</p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-10 -->
-    <section class="portfolio-page">
+      <!-- image-10 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-10.jpg" alt="Hans" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-10.jpg"
+            alt="Hans"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Hans</h2>
-            <p class="text-sm md:text-base leading-relaxed">i can't remember what's special about hans. he's a quiet one.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Hans</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            i can't remember what's special about hans. he's a quiet one.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-11 -->
-    <section class="portfolio-page">
+      <!-- image-11 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-11.jpg" alt="Gerti" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-11.jpg"
+            alt="Gerti"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gerti</h2>
-            <p class="text-sm md:text-base leading-relaxed">still undefeated in the category best hair of the year. meticulous as usual.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gerti</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            still undefeated in the category best hair of the year. meticulous as usual.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-12 -->
-    <section class="portfolio-page">
+      <!-- image-12 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-12.jpg" alt="Heinz and Ingrid" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-12.jpg"
+            alt="Heinz and Ingrid"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Heinz and Ingrid</h2>
-            <p class="text-sm md:text-base leading-relaxed">he can't stop thinking about lemon tarts, and how much his feet hurt.<br/>she knows he wants the chair. but those delicious looking raspberry mini cakes with white chocolate ganache are going fast.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Heinz and Ingrid</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            he can't stop thinking about lemon tarts, and how much his feet hurt.<br />she knows he wants the
+            chair. but those delicious looking raspberry mini cakes with white chocolate ganache are going
+            fast.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-13 -->
-    <section class="portfolio-page">
+      <!-- image-13 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-13.jpg" alt="Gretchen" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-13.jpg"
+            alt="Gretchen"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gretchen</h2>
-            <p class="text-sm md:text-base leading-relaxed">"1 2 3 5 7 8 9, so 4 and 6. correct. just like 30 seconds ago."</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Gretchen</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            "1 2 3 5 7 8 9, so 4 and 6. correct. just like 30 seconds ago."
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-14 -->
-    <section class="portfolio-page">
+      <!-- image-14 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-14.jpg" alt="Helmut and Roberta" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-14.jpg"
+            alt="Helmut and Roberta"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Helmut and Roberta</h2>
-            <p class="text-sm md:text-base leading-relaxed">helmut, who doesn't think about his dummy anymore and<br/>roberta who's still in love with that highschool-boy.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Helmut and Roberta</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            helmut, who doesn't think about his dummy anymore and<br />roberta who's still in love with that
+            highschool-boy.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-15 -->
-    <section class="portfolio-page">
+      <!-- image-15 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-15.jpg" alt="Liberty" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-15.jpg"
+            alt="Liberty"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Liberty</h2>
-            <p class="text-sm md:text-base leading-relaxed">practicing her oscar acceptance speech once again as the world around her freezes in time.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Liberty</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            practicing her oscar acceptance speech once again as the world around her freezes in time.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-16 -->
-    <section class="portfolio-page">
+      <!-- image-16 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-16.jpg" alt="Iggy" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-16.jpg"
+            alt="Iggy"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Iggy</h2>
-            <p class="text-sm md:text-base leading-relaxed">mjam. *beep* *boop*</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Iggy</h2>
+          <p class="text-sm md:text-base leading-relaxed">mjam. *beep* *boop*</p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-17 -->
-    <section class="portfolio-page">
+      <!-- image-17 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-17.jpg" alt="Debbie" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-17.jpg"
+            alt="Debbie"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Debbie</h2>
-            <p class="text-sm md:text-base leading-relaxed">evaluating escape routes: a rheuma flare-up, a headache, or a crochet emergency.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Debbie</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            evaluating escape routes: a rheuma flare-up, a headache, or a crochet emergency.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-18 -->
-    <section class="portfolio-page">
+      <!-- image-18 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-18.jpg" alt="Bob and Bob jr" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-18.jpg"
+            alt="Bob and Bob jr"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Bob and Bob jr</h2>
-            <p class="text-sm md:text-base leading-relaxed">one day little bob will lose his love for balloons, and instantly look exactly like old bob.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Bob and Bob jr</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            one day little bob will lose his love for balloons, and instantly look exactly like old bob.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-19 -->
-    <section class="portfolio-page">
+      <!-- image-19 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-19.jpg" alt="Tatjana" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-19.jpg"
+            alt="Tatjana"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Tatjana</h2>
-            <p class="text-sm md:text-base leading-relaxed">she could have definitely chosen a more optimal location for her refreshment stand, but she likes it quiet and gray. there's on average one lost tourist and a few guys in suits every day. and those pay really well if you start trauma dumping.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Tatjana</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            she could have definitely chosen a more optimal location for her refreshment stand, but she likes
+            it quiet and gray. there's on average one lost tourist and a few guys in suits every day. and
+            those pay really well if you start trauma dumping.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-20 -->
-    <section class="portfolio-page">
+      <!-- image-20 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-20.jpg" alt="Reem" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-20.jpg"
+            alt="Reem"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Reem</h2>
-            <p class="text-sm md:text-base leading-relaxed">at her favorite spot. at the flagpost. in lebanon.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Reem</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            at her favorite spot. at the flagpost. in lebanon.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-21 -->
-    <section class="portfolio-page">
+      <!-- image-21 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-21.jpg" alt="Finn" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-21.jpg"
+            alt="Finn"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Finn</h2>
-            <p class="text-sm md:text-base leading-relaxed">day trader by night, candy crusher by day.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Finn</h2>
+          <p class="text-sm md:text-base leading-relaxed">day trader by night, candy crusher by day.</p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-22 -->
-    <section class="portfolio-page">
+      <!-- image-22 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-22.jpg" alt="Noah" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-22.jpg"
+            alt="Noah"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Noah</h2>
-            <p class="text-sm md:text-base leading-relaxed">ok, brightness up, saturation down, lo-fi filter, going viral in 3, 2, 1</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Noah</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            ok, brightness up, saturation down, lo-fi filter, going viral in 3, 2, 1
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-23 -->
-    <section class="portfolio-page">
+      <!-- image-23 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-23.jpg" alt="Sandra and Achmet" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-23.jpg"
+            alt="Sandra and Achmet"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Sandra and Achmet</h2>
-            <p class="text-sm md:text-base leading-relaxed">Sandra doesn't know she's going to be standing behind Achmet in the bakery queue soon. or that Achmet never washes his hands.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Sandra and Achmet</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            Sandra doesn't know she's going to be standing behind Achmet in the bakery queue soon. or that
+            Achmet never washes his hands.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-24 -->
-    <section class="portfolio-page">
+      <!-- image-24 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-24.jpg" alt="Joe" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-24.jpg"
+            alt="Joe"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Joe</h2>
-            <p class="text-sm md:text-base leading-relaxed">two more sunny days and this whole tanning situation will be sorted.</p>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Joe</h2>
+          <p class="text-sm md:text-base leading-relaxed">
+            two more sunny days and this whole tanning situation will be sorted.
+          </p>
         </div>
-    </section>
+      </section>
 
-    <!-- image-25 -->
-    <section class="portfolio-page">
+      <!-- image-25 -->
+      <section class="portfolio-page">
         <div class="image-container">
-            <img src="images/image-25.jpg" alt="Markus" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
+          <img
+            src="images/image-25.jpg"
+            alt="Markus"
+            onerror="
+              this.onerror = null;
+              this.src = 'https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';
+            "
+          />
         </div>
         <div class="text-container">
-            <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Markus</h2>
-            <p class="text-sm md:text-base leading-relaxed">observing.</p>
-            <div class="mt-8 flex flex-row space-x-4">
-                <a href="https://www.instagram.com/mosanger" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
-                <a href="mailto:mosanger@gmail.com" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 4,6"></polyline></svg>
-                </a>
-            </div>
+          <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Markus</h2>
+          <p class="text-sm md:text-base leading-relaxed">observing.</p>
+          <div class="mt-8 flex flex-row space-x-4">
+            <a
+              href="https://www.instagram.com/mosanger"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-6 w-6"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="mailto:mosanger@gmail.com" class="social-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-6 w-6"
+              >
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 4,6"></polyline>
+              </svg>
+            </a>
+          </div>
         </div>
-    </section>
-
+      </section>
     </main>
 
     <script src="js/exifreader.min.js"></script>
     <script>
-        // Reads title (dc:title) and caption (dc:description) from each image's
-        // embedded XMP metadata and fills the spread. The text hardcoded in the
-        // HTML below is only a fallback — the metadata wins when present.
-        const fillFromMetadata = () => {
-            const pages = document.querySelectorAll('.portfolio-pages .portfolio-page');
+      // Reads title (dc:title) and caption (dc:description) from each image's
+      // embedded XMP metadata and fills the spread. The text hardcoded in the
+      // HTML below is only a fallback — the metadata wins when present.
+      const fillFromMetadata = () => {
+        const pages = document.querySelectorAll(".portfolio-pages .portfolio-page");
 
-            pages.forEach(page => {
-                const img = page.querySelector('img');
-                const h2 = page.querySelector('h2');
-                const p = page.querySelector('p');
-                if (!img || !img.src || !h2 || !p) return;
+        pages.forEach((page) => {
+          const img = page.querySelector("img");
+          const h2 = page.querySelector("h2");
+          const p = page.querySelector("p");
+          if (!img || !img.src || !h2 || !p) return;
 
-                fetch(img.src)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        return res.arrayBuffer();
-                    })
-                    .then(buffer => {
-                        const tags = ExifReader.load(buffer);
-                        // XMP dc:title/dc:description surface as flattened keys
-                        // 'title'/'description'; IPTC + EXIF are fallbacks.
-                        const text = t => {
-                            if (!t) return '';
-                            if (typeof t.description === 'string' && t.description) return t.description;
-                            if (Array.isArray(t.value)) {
-                                const first = t.value[0];
-                                if (first && typeof first === 'object') return first.description || first.value || '';
-                                return t.value.join('');
-                            }
-                            return t.value || '';
-                        };
-                        const title = text(tags['title'] || tags['Object Name']);
-                        const desc = text(tags['description'] || tags['Caption/Abstract'] || tags['ImageDescription']);
-                        if (title) h2.textContent = title;
-                        if (desc) p.textContent = desc;
-                    })
-                    .catch(err => {
-                        // Keep the hardcoded fallback text on any failure.
-                        console.warn('[observedbutnotreally] could not read metadata from', img.src, err);
-                    });
+          fetch(img.src)
+            .then((res) => {
+              if (!res.ok) throw new Error(`HTTP ${res.status}`);
+              return res.arrayBuffer();
+            })
+            .then((buffer) => {
+              const tags = ExifReader.load(buffer);
+              // XMP dc:title/dc:description surface as flattened keys
+              // 'title'/'description'; IPTC + EXIF are fallbacks.
+              const text = (t) => {
+                if (!t) return "";
+                if (typeof t.description === "string" && t.description) return t.description;
+                if (Array.isArray(t.value)) {
+                  const first = t.value[0];
+                  if (first && typeof first === "object") return first.description || first.value || "";
+                  return t.value.join("");
+                }
+                return t.value || "";
+              };
+              const title = text(tags["title"] || tags["Object Name"]);
+              const desc = text(tags["description"] || tags["Caption/Abstract"] || tags["ImageDescription"]);
+              if (title) h2.textContent = title;
+              if (desc) p.textContent = desc;
+            })
+            .catch((err) => {
+              // Keep the hardcoded fallback text on any failure.
+              console.warn("[observedbutnotreally] could not read metadata from", img.src, err);
             });
-        };
+        });
+      };
 
-        window.addEventListener('load', fillFromMetadata);
+      window.addEventListener("load", fillFromMetadata);
     </script>
 
     <script>
-        // This script adjusts layout based on image orientation for desktop view.
-        const adjustAllLayouts = () => {
-            const portfolioPages = document.querySelectorAll('.portfolio-page');
-            const breakpoint = 768; // Corresponds to md: breakpoint in Tailwind
+      // This script adjusts layout based on image orientation for desktop view.
+      const adjustAllLayouts = () => {
+        const portfolioPages = document.querySelectorAll(".portfolio-page");
+        const breakpoint = 768; // Corresponds to md: breakpoint in Tailwind
 
-            portfolioPages.forEach(page => {
-                const imageContainer = page.querySelector('.image-container');
-                const textContainer = page.querySelector('.text-container');
-                const img = page.querySelector('img');
+        portfolioPages.forEach((page) => {
+          const imageContainer = page.querySelector(".image-container");
+          const textContainer = page.querySelector(".text-container");
+          const img = page.querySelector("img");
 
-                if (!imageContainer || !textContainer || !img) {
-                    return;
-                }
+          if (!imageContainer || !textContainer || !img) {
+            return;
+          }
 
-                // If we are on a mobile-sized screen, clear inline styles and let CSS media queries take over.
-                if (window.innerWidth <= breakpoint) {
-                    imageContainer.style.width = '';
-                    textContainer.style.width = '';
-                    return;
-                }
+          // If we are on a mobile-sized screen, clear inline styles and let CSS media queries take over.
+          if (window.innerWidth <= breakpoint) {
+            imageContainer.style.width = "";
+            textContainer.style.width = "";
+            return;
+          }
 
-                // On desktop, adjust layout based on image aspect ratio.
-                const adjustForOrientation = () => {
-                    const isPortrait = img.naturalHeight > img.naturalWidth;
-                    if (isPortrait) {
-                        imageContainer.style.width = '50%';
-                        textContainer.style.width = '50%';
-                    } else {
-                        // Explicitly set the default landscape/square layout for desktop
-                        imageContainer.style.width = '75%';
-                        textContainer.style.width = '25%';
-                    }
-                };
+          // On desktop, adjust layout based on image aspect ratio.
+          const adjustForOrientation = () => {
+            const isPortrait = img.naturalHeight > img.naturalWidth;
+            if (isPortrait) {
+              imageContainer.style.width = "50%";
+              textContainer.style.width = "50%";
+            } else {
+              // Explicitly set the default landscape/square layout for desktop
+              imageContainer.style.width = "75%";
+              textContainer.style.width = "25%";
+            }
+          };
 
-                // Check if the image has finished loading to get its dimensions.
-                if (img.complete && img.naturalHeight > 0) {
-                    adjustForOrientation();
-                } else {
-                    // If not loaded, wait for the load event before adjusting.
-                    img.addEventListener('load', adjustForOrientation, { once: true });
-                }
-            });
-        };
+          // Check if the image has finished loading to get its dimensions.
+          if (img.complete && img.naturalHeight > 0) {
+            adjustForOrientation();
+          } else {
+            // If not loaded, wait for the load event before adjusting.
+            img.addEventListener("load", adjustForOrientation, { once: true });
+          }
+        });
+      };
 
-        // Run the layout adjustment after the initial page load and on window resize.
-        window.addEventListener('load', adjustAllLayouts);
-        window.addEventListener('resize', adjustAllLayouts);
+      // Run the layout adjustment after the initial page load and on window resize.
+      window.addEventListener("load", adjustAllLayouts);
+      window.addEventListener("resize", adjustAllLayouts);
     </script>
-
-</body>
+  </body>
 </html>
