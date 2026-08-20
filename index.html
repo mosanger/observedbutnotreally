@@ -462,9 +462,20 @@
                     })
                     .then(buffer => {
                         const tags = ExifReader.load(buffer);
-                        const text = t => t && (t.description || t.value);
-                        const title = text(tags['dc:title']);
-                        const desc = text(tags['dc:description']);
+                        // XMP dc:title/dc:description surface as flattened keys
+                        // 'title'/'description'; IPTC + EXIF are fallbacks.
+                        const text = t => {
+                            if (!t) return '';
+                            if (typeof t.description === 'string' && t.description) return t.description;
+                            if (Array.isArray(t.value)) {
+                                const first = t.value[0];
+                                if (first && typeof first === 'object') return first.description || first.value || '';
+                                return t.value.join('');
+                            }
+                            return t.value || '';
+                        };
+                        const title = text(tags['title'] || tags['Object Name']);
+                        const desc = text(tags['description'] || tags['Caption/Abstract'] || tags['ImageDescription']);
                         if (title) h2.textContent = title;
                         if (desc) p.textContent = desc;
                     })
