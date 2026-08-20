@@ -68,12 +68,27 @@
             flex-shrink: 0;
             transition: width 0.3s ease-in-out; /* Smooth transition */
         }
-        .page-right .image-container {
-            order: 2;
+        /* Caption text pulled from Flickr metadata may contain newlines */
+        .text-container p {
+            white-space: pre-line;
         }
-        .page-right .text-container {
-            order: 1;
-            text-align: right; 
+        /* Left/right alternation driven by CSS even/odd — no manual classes needed.
+           Only applies on desktop; mobile stacks image over text regardless. */
+        @media (min-width: 769px) {
+            .portfolio-pages .portfolio-page:nth-child(odd) .image-container {
+                order: 1;
+            }
+            .portfolio-pages .portfolio-page:nth-child(odd) .text-container {
+                order: 2;
+                text-align: left;
+            }
+            .portfolio-pages .portfolio-page:nth-child(even) .image-container {
+                order: 2;
+            }
+            .portfolio-pages .portfolio-page:nth-child(even) .text-container {
+                order: 1;
+                text-align: right;
+            }
         }
         .image-container img {
             width: 100%;
@@ -86,15 +101,11 @@
             .portfolio-page {
                 flex-direction: column; 
             }
-            .page-right .image-container,
-            .portfolio-page .image-container,
-            .image-container {
+            .portfolio-pages .image-container {
                  order: 1;
                  width: 100%;
             }
-            .page-right .text-container,
-            .portfolio-page .text-container,
-            .text-container {
+            .portfolio-pages .text-container {
                 order: 2;
                 width: 100%;
                 padding-top: 2rem;
@@ -143,8 +154,10 @@
         </div>
     </section>
 
+    <main class="portfolio-pages">
+
     <!-- Page 1 -->
-    <section class="portfolio-page">
+    <section class="portfolio-page" data-photo-id="237949527">
         <div class="image-container">
             <img src="https://live.staticflickr.com/89/237949527_532d744417_o.jpg" alt="A blurry, long-exposure shot of a person walking on a city sidewalk at night, with light trails from cars." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -155,7 +168,7 @@
     </section>
     
     <!-- Page 2 -->
-    <section class="portfolio-page page-right">
+    <section class="portfolio-page" data-photo-id="237949826">
         <div class="image-container">
             <img src="https://live.staticflickr.com/82/237949826_bfc275e844_o.jpg" alt="A candid black and white photo of a man sitting at a table looking off to the side." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -166,7 +179,7 @@
     </section>
 
     <!-- Page 3 -->
-    <section class="portfolio-page">
+    <section class="portfolio-page" data-photo-id="276513132">
         <div class="image-container">
             <img src="https://live.staticflickr.com/110/276513132_a2876901f9_o.jpg" alt="A woman with dark hair looks over her shoulder with a concerned expression." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -177,7 +190,7 @@
     </section>
 
     <!-- Page 4 -->
-    <section class="portfolio-page page-right">
+    <section class="portfolio-page" data-photo-id="298356238">
         <div class="image-container">
             <img src="https://live.staticflickr.com/99/298356238_8f27dcc818_o.jpg" alt="An abandoned shopping cart sits alone on a sidewalk." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -188,7 +201,7 @@
     </section>
 
     <!-- Page 5 -->
-    <section class="portfolio-page">
+    <section class="portfolio-page" data-photo-id="454672129">
         <div class="image-container">
             <img src="https://live.staticflickr.com/220/454672129_6157935de3_o.jpg" alt="A person with voluminous, styled hair seen from behind." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -199,7 +212,7 @@
     </section>
 
     <!-- Page 6 -->
-    <section class="portfolio-page page-right">
+    <section class="portfolio-page" data-photo-id="255865219">
         <div class="image-container">
             <img src="https://live.staticflickr.com/92/255865219_7e156eddf7_c.jpg"  onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -210,7 +223,7 @@
     </section>
 
     <!-- Page 7 -->
-    <section class="portfolio-page">
+    <section class="portfolio-page" data-photo-id="221277779">
         <div class="image-container">
             <img src="https://live.staticflickr.com/97/221277779_75abe26ee6_c.jpg" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -220,8 +233,8 @@
         </div>
     </section>
 
-    <!-- Page 6 -->
-    <section class="portfolio-page page-right">
+    <!-- Page 8 -->
+    <section class="portfolio-page" data-photo-id="2022161605">
         <div class="image-container">
             <img src="https://live.staticflickr.com/2152/2022161605_48575d4f8e_o.jpg" alt="Two men sitting together, laughing." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -231,8 +244,8 @@
         </div>
     </section>
 
-    <!-- Page 7 -->
-    <section class="portfolio-page">
+    <!-- Page 9 -->
+    <section class="portfolio-page" data-photo-id="2639257057">
         <div class="image-container">
             <img src="https://live.staticflickr.com/3069/2639257057_fde1d36a28_o.jpg" alt="A woman in a decorative hat sitting on a couch." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -242,8 +255,8 @@
         </div>
     </section>
 
-    <!-- Page 8 -->
-    <section class="portfolio-page page-right">
+    <!-- Page 10 -->
+    <section class="portfolio-page" data-photo-id="2675125415">
         <div class="image-container">
             <img src="https://live.staticflickr.com/3234/2675125415_d459a7c5df_o.jpg" alt="A child holding white balloons stands next to an older man." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -253,8 +266,8 @@
         </div>
     </section>
 
-    <!-- Page 9 -->
-    <section class="portfolio-page">
+    <!-- Page 11 -->
+    <section class="portfolio-page" data-photo-id="2675127857">
         <div class="image-container">
             <img src="https://live.staticflickr.com/3144/2675127857_969efda2ff_o.jpg" alt="A person with a unique hat and checkered pattern, standing behind a crowd barrier." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -264,8 +277,8 @@
         </div>
     </section>
 
-    <!-- Page 10 -->
-    <section class="portfolio-page page-right">
+    <!-- Page 12 -->
+    <section class="portfolio-page" data-photo-id="54581831523">
         <div class="image-container">
             <img src="https://live.staticflickr.com/65535/54581831523_526132f1d8_o.jpg" alt="A person sitting at a small table on a gray, empty plaza." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -275,8 +288,8 @@
         </div>
     </section>
 
-    <!-- Page 11 -->
-    <section class="portfolio-page">
+    <!-- Page 13 -->
+    <section class="portfolio-page" data-photo-id="2099531092">
         <div class="image-container">
             <img src="https://live.staticflickr.com/2145/2099531092_a11195e653_c.jpg" alt="A man looks out a window, his reflection visible in the glass." onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e2e8f0/334155?text=Image+Not+Found';">
         </div>
@@ -288,11 +301,70 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
                 <a href="mailto:mosanger@gmail.com" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 4,6"></polyline></svg>
                 </a>
             </div>
         </div>
     </section>
+
+    </main>
+
+    <script>
+        // ============================================================
+        // Flickr API key — create one for free at:
+        //   https://www.flickr.com/services/apps/create/
+        // then paste it here. Until then the page shows the fallback
+        // text hardcoded in the HTML below.
+        // ============================================================
+        const FLICKR_API_KEY = 'YOUR_FLICKR_API_KEY_HERE';
+
+        // Reads title + caption from each photo's Flickr metadata and
+        // fills the spread. Title -> h2 (character name), description
+        // -> caption paragraph. Falls back silently on any failure.
+        const fillFromFlickr = async () => {
+            if (!FLICKR_API_KEY || FLICKR_API_KEY === 'YOUR_FLICKR_API_KEY_HERE') {
+                console.warn('[observedbutnotreally] No Flickr API key set — showing fallback text.');
+                return;
+            }
+
+            const pages = document.querySelectorAll('.portfolio-pages .portfolio-page');
+
+            await Promise.allSettled([...pages].map(async (page) => {
+                const photoId = page.dataset.photoId;
+                if (!photoId) return;
+
+                try {
+                    const params = new URLSearchParams({
+                        method: 'flickr.photos.getInfo',
+                        api_key: FLICKR_API_KEY,
+                        photo_id: photoId,
+                        format: 'json',
+                        nojsoncallback: '1'
+                    });
+                    const res = await fetch(`https://www.flickr.com/services/rest/?${params}`);
+                    const data = await res.json();
+
+                    if (data.stat !== 'ok') {
+                        throw new Error(data.message || 'Flickr API error');
+                    }
+
+                    const title = data.photo && data.photo.title && data.photo.title._content;
+                    const desc = data.photo && data.photo.description && data.photo.description._content;
+
+                    const h2 = page.querySelector('h2');
+                    const p = page.querySelector('p');
+
+                    if (title && h2) h2.textContent = title;
+                    if (desc && p) p.textContent = desc;
+                } catch (err) {
+                    // Keep the hardcoded fallback text on any failure.
+                    console.warn(`[observedbutnotreally] Could not load metadata for photo ${photoId}:`, err.message);
+                }
+            }));
+        };
+
+        window.addEventListener('load', fillFromFlickr);
+    </script>
 
     <script>
         // This script adjusts layout based on image orientation for desktop view.
