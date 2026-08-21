@@ -47,7 +47,13 @@ dimensions (Admin → Custom definitions → Create custom dimension) with event
 scope. Verify live events via DebugView. To point at a different property,
 replace the ID in the `gtag/js?id=` URL and the `gtag('config', …)` call.
 
-Note: no consent banner yet. If EU consent handling is ever needed, say the word.
+**Consent:** the site uses GA4 Consent Mode v2 — `analytics_storage` defaults to
+`denied` and nothing counts until the visitor clicks **ok** on the consent banner.
+The choice is stored in localStorage under `ga-consent` (`granted`/`denied`);
+the banner only shows when no choice is stored. No cookie is used.
+
+**Imprint & Privacy:** a section at the bottom of the page (English, address
+Bürgerspitalgasse 22/35, 1060 Wien). Update it if you move or change contact info.
 
 ## Current state (2026-08-20)
 

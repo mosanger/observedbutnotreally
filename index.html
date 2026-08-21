@@ -9,6 +9,12 @@
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+        });
         gtag('js', new Date());
         gtag('config', 'G-C4WK9KXT0E');
     </script>
@@ -133,6 +139,83 @@
       }
       .social-link:hover {
         color: #000000;
+      }
+
+      /* Consent banner */
+      #consent-banner {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 560px;
+        width: calc(100% - 40px);
+        background: #ffffff;
+        border: 1px solid #000000;
+        padding: 18px 22px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        font-size: 0.85rem;
+        line-height: 1.55;
+        display: none;
+        z-index: 100;
+      }
+      #consent-banner .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      #consent-banner .actions {
+        display: flex;
+        gap: 18px;
+        flex-shrink: 0;
+      }
+      #consent-banner button {
+        background: none;
+        border: none;
+        border-bottom: 1px solid #000;
+        padding: 0 0 2px;
+        font-family: inherit;
+        font-size: inherit;
+        color: #000;
+        cursor: pointer;
+      }
+      #consent-banner button:hover {
+        opacity: 0.6;
+      }
+      #consent-banner .hint {
+        margin-top: 8px;
+        color: #888;
+        font-size: 0.75rem;
+      }
+
+      /* Imprint & privacy */
+      .impressum {
+        padding: 10vh 6vw 14vh;
+        max-width: 720px;
+        margin: 0 auto;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #222;
+      }
+      .impressum h2 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+      }
+      .impressum h3 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 1.6rem 0 0.4rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .impressum .note {
+        color: #888;
+        font-size: 0.8rem;
+        margin-top: 2.5rem;
+        border-top: 1px solid #e5e5e5;
+        padding-top: 1rem;
       }
     </style>
   </head>
@@ -731,6 +814,51 @@
       </section>
     </main>
 
+    <!-- Consent banner — shown only until a choice is stored on the device -->
+    <div id="consent-banner" role="dialog" aria-label="cookie and analytics consent">
+      <div class="row">
+        <div>this site uses google analytics to count visits.</div>
+        <div class="actions">
+          <button id="btn-consent-ok" type="button">ok</button>
+          <button id="btn-consent-no" type="button">no thanks</button>
+        </div>
+      </div>
+      <div class="hint">your choice is stored on your device.</div>
+    </div>
+
+    <!-- Imprint & privacy -->
+    <section class="impressum">
+      <h2>Imprint &amp; Privacy</h2>
+
+      <h3>Imprint</h3>
+      <p>
+        Markus Osanger<br />
+        Bürgerspitalgasse 22/35<br />
+        1060 Wien, Austria<br />
+        <a href="mailto:mosanger@gmail.com">mosanger@gmail.com</a><br />
+        responsible for the content of this page.
+      </p>
+      <p class="note">
+        the people named in the captions are characters of an unreliable narrator.
+        any resemblance to real persons is intentional but not their fault.
+      </p>
+
+      <h3>Privacy</h3>
+      <p>
+        This page uses Google Analytics 4 (Google Ireland Limited) to count visits and
+        measure which pictures are looked at. That includes page views, approximate
+        location, and device/browser information, processed by Google. This happens only
+        with your explicit consent (Art. 6 (1) (a) GDPR), which you give or refuse via the
+        banner. Your choice is stored on your device (localStorage), not in a cookie.
+      </p>
+      <p>
+        You can withdraw your consent at any time by contacting
+        <a href="mailto:mosanger@gmail.com">mosanger@gmail.com</a>. You have the right to
+        access, correct, delete and object to the processing of your data, and to lodge a
+        complaint with the Austrian data protection authority (DSB).
+      </p>
+    </section>
+
     <script src="js/exifreader.min.js"></script>
     <script>
       // Reads title (dc:title) and caption (dc:description) from each image's
@@ -863,6 +991,39 @@
       // Run the layout adjustment after the initial page load and on window resize.
       window.addEventListener("load", adjustAllLayouts);
       window.addEventListener("resize", adjustAllLayouts);
+    </script>
+
+    <script>
+      // Consent banner + GA4 consent mode.
+      // Nothing is stored or counted until the visitor chooses "ok".
+      (() => {
+        const KEY = "ga-consent";
+        const banner = document.getElementById("consent-banner");
+        if (!banner) return;
+        if (typeof gtag !== "function") return;
+
+        const apply = (value) => {
+          gtag("consent", "update", {
+            analytics_storage: value === "granted" ? "granted" : "denied",
+          });
+        };
+
+        const choose = (value) => {
+          localStorage.setItem(KEY, value);
+          banner.style.display = "none";
+          apply(value);
+        };
+
+        const stored = localStorage.getItem(KEY);
+        if (stored) {
+          apply(stored); // reflect a previously made choice
+        } else {
+          banner.style.display = "block"; // ask first
+        }
+
+        document.getElementById("btn-consent-ok").addEventListener("click", () => choose("granted"));
+        document.getElementById("btn-consent-no").addEventListener("click", () => choose("denied"));
+      })();
     </script>
   </body>
 </html>
