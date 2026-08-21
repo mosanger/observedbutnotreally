@@ -157,11 +157,13 @@
         color: #000000;
         border-bottom-color: #000000;
       }
-      /* Site footer (link to imprint page) */
+      /* Site footer (link to imprint page) — also a snap point so the
+         snapping can't trap the scroll above it */
       .site-footer {
         text-align: center;
         padding: 4vh 5vw 6vh;
         font-size: 0.8rem;
+        scroll-snap-align: end;
       }
       .site-footer a {
         color: #4b5563;
@@ -815,7 +817,7 @@ he's not in it.</p>
       // Keyboard navigation: right/down -> next page, left/up -> previous.
       // Pages are the cover, the quote and every spread, in document order.
       (() => {
-        const PAGES_SELECTOR = ".cover-wrapper, .quote-page, .portfolio-pages .portfolio-page";
+        const PAGES_SELECTOR = ".cover-wrapper, .quote-page, .portfolio-pages .portfolio-page, .site-footer";
 
         const isTyping = () => {
           const el = document.activeElement;
