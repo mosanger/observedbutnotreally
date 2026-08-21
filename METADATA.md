@@ -51,16 +51,15 @@ localStorage**. Replaces the former GA4 + consent-banner setup (removed 2026-08-
 English, address Bürgerspitalgasse 22/35, 1060 Wien), linked from the site footer.
 Update it if you move or change contact info.
 
-## Current state (2026-08-20)
+## Current state (2026-08-21)
 
+- **30 spreads** (was 25): re-sequenced 2026-08-21 — five new characters (Walter,
+  Rafael & Rafael, Lena, Antonia, Fabian & Kerstin); several files renumbered and
+  captions updated (Liberty, Jessy, Marla, Hans…). The HTML fallback text is
+  byte-identical to the embedded metadata for all 30 files.
 - Favicon: 👀 — `favicon.svg` renders the emoji as text (crisp in modern browsers);
   PNG fallbacks derived from Noto Color Emoji (SIL OFL, transparent background).
-
-- 25 spreads, metadata embedded and matching the fallback text.
 - `[Name unknown]` (the checkered-hat hero) is **not** in the export set — export it
   as a numbered image if you want that spread back.
-- `image-15` (Liberty): the embedded title is typed `LIberty` (capital I) — fix in
-  Lightroom and re-export, or edit the XMP directly; the site will show whatever
-  the metadata says.
 - Cover (`images/cover.jpg`) is hardcoded — its title is the book title, not metadata.
 - Copyright is embedded on every export ("Markus Osanger").
