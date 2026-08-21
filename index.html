@@ -780,6 +780,42 @@
     </script>
 
     <script>
+      // Fire a GA4 "spread_view" event when a spread becomes visible on scroll
+      // (once per spread per page load — no refire on scroll out/in).
+      (() => {
+        if (!("IntersectionObserver" in window)) return;
+        const pages = document.querySelectorAll(".portfolio-pages .portfolio-page");
+        if (!pages.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const page = entry.target;
+              observer.unobserve(page); // one shot per spread
+              if (typeof gtag !== "function") return;
+
+              const h2 = page.querySelector("h2");
+              const img = page.querySelector("img");
+              const index = Array.prototype.indexOf.call(pages, page) + 1;
+              const spread = h2 ? h2.textContent.trim() : "";
+              const image = img ? (img.src.split("/").pop() || "") : "";
+
+              gtag("event", "spread_view", {
+                spread: spread,
+                spread_index: index,
+                image: image,
+              });
+            });
+          },
+          { threshold: 0.5 } // fire when half the spread is on screen
+        );
+
+        pages.forEach((page) => observer.observe(page));
+      })();
+    </script>
+
+    <script>
       // This script adjusts layout based on image orientation for desktop view.
       const adjustAllLayouts = () => {
         const portfolioPages = document.querySelectorAll(".portfolio-page");

@@ -35,11 +35,19 @@ Roughly the same flow works from any editor that writes XMP `dc:title`/`dc:descr
 ## Analytics (Google Analytics 4)
 
 Active since 2026-08-20, Measurement ID `G-C4WK9KXT0E` (gtag.js snippet in
-`index.html`'s `<head>`; fires `page_view` on load). To point at a different
-property, replace the ID in the `gtag/js?id=` URL and the `gtag('config', …)` call.
+`index.html`'s `<head>`). Events:
 
-Note: bare page_view setup — no consent banner, no custom events. If you ever
-want scroll/spread-view events or EU consent handling, say the word.
+- `page_view` — automatic, on load.
+- `spread_view` — fired once per spread when it scrolls to ≥50% visibility
+  (IntersectionObserver). Custom parameters: `spread` (character name),
+  `spread_index` (1-based book position), `image` (filename).
+
+To see `spread`/`spread_index`/`image` in reports, register them as custom
+dimensions (Admin → Custom definitions → Create custom dimension) with event
+scope. Verify live events via DebugView. To point at a different property,
+replace the ID in the `gtag/js?id=` URL and the `gtag('config', …)` call.
+
+Note: no consent banner yet. If EU consent handling is ever needed, say the word.
 
 ## Current state (2026-08-20)
 
