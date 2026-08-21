@@ -102,6 +102,7 @@
       @media (min-width: 769px) {
         .portfolio-pages .portfolio-page:nth-child(odd) .image-container {
           order: 1;
+          justify-content: flex-end;
         }
         .portfolio-pages .portfolio-page:nth-child(odd) .text-container {
           order: 2;
@@ -109,6 +110,7 @@
         }
         .portfolio-pages .portfolio-page:nth-child(even) .image-container {
           order: 2;
+          justify-content: flex-start;
         }
         .portfolio-pages .portfolio-page:nth-child(even) .text-container {
           order: 1;
@@ -806,8 +808,8 @@ he's not in it.</p>
               textContainer.style.width = "50%";
             } else {
               // Explicitly set the default landscape/square layout for desktop
-              imageContainer.style.width = "75%";
-              textContainer.style.width = "25%";
+              imageContainer.style.width = "66%";
+              textContainer.style.width = "33%";
             }
           };
 
