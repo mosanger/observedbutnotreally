@@ -31,6 +31,10 @@
       html {
         scroll-snap-type: y proximity;
       }
+      /* Zoomed in? disable snapping — it fights pinch-panning */
+      html.no-snap {
+        scroll-snap-type: none;
+      }
       .cover-wrapper,
       .quote-page,
       .portfolio-page {
@@ -858,6 +862,22 @@ he's not in it.</p>
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
+      })();
+    </script>
+
+    <script>
+      // Disable scroll snapping while the page is zoomed (pinch zoom makes the
+      // snap fight the user's panning). visualViewport.scale > 1 means zoomed.
+      (() => {
+        const vv = window.visualViewport;
+        if (!vv) return;
+        const root = document.documentElement;
+        const update = () => {
+          root.classList.toggle("no-snap", vv.scale > 1.01);
+        };
+        vv.addEventListener("resize", update);
+        vv.addEventListener("scroll", update);
+        update();
       })();
     </script>
   </body>
