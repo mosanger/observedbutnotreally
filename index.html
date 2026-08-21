@@ -26,7 +26,8 @@
         font-family: "Playfair Display", serif;
       }
       /* Page-based scroll snapping: cover, quote and every spread is a snap
-         point. proximity (not mandatory) so tall mobile spreads stay scrollable. */
+         point. proximity (not mandatory) so tall mobile spreads stay scrollable;
+         scroll-snap-stop: always so a fast fling can't skip multiple pages. */
       html {
         scroll-snap-type: y proximity;
       }
@@ -34,6 +35,7 @@
       .quote-page,
       .portfolio-page {
         scroll-snap-align: start;
+        scroll-snap-stop: always;
       }
       .cover-wrapper {
         height: 100vh;
