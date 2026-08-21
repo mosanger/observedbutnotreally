@@ -52,8 +52,9 @@ replace the ID in the `gtag/js?id=` URL and the `gtag('config', …)` call.
 The choice is stored in localStorage under `ga-consent` (`granted`/`denied`);
 the banner only shows when no choice is stored. No cookie is used.
 
-**Imprint & Privacy:** a section at the bottom of the page (English, address
-Bürgerspitalgasse 22/35, 1060 Wien). Update it if you move or change contact info.
+**Imprint & Privacy:** on its own page at `/imprint/` (`imprint/index.html`,
+English, address Bürgerspitalgasse 22/35, 1060 Wien), linked from the site footer
+and the consent banner. Update it if you move or change contact info.
 
 ## Current state (2026-08-20)
 

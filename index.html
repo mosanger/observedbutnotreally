@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Observations of an Absent Mind</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- Google tag (gtag.js) — Google Analytics 4. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C4WK9KXT0E"></script>
     <script>
@@ -150,7 +153,6 @@
         max-width: 560px;
         width: calc(100% - 40px);
         background: #ffffff;
-        border: 1px solid #000000;
         padding: 18px 22px;
         box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
         font-size: 0.85rem;
@@ -188,34 +190,20 @@
         font-size: 0.75rem;
       }
 
-      /* Imprint & privacy */
-      .impressum {
-        padding: 10vh 6vw 14vh;
-        max-width: 720px;
-        margin: 0 auto;
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: #222;
-      }
-      .impressum h2 {
-        font-family: 'Playfair Display', serif;
-        font-weight: 500;
-        font-size: 1.5rem;
-        margin-bottom: 1.2rem;
-      }
-      .impressum h3 {
-        font-size: 0.95rem;
-        font-weight: 600;
-        margin: 1.6rem 0 0.4rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-      }
-      .impressum .note {
-        color: #888;
+      /* Site footer (link to imprint page) */
+      .site-footer {
+        text-align: center;
+        padding: 4vh 5vw 6vh;
         font-size: 0.8rem;
-        margin-top: 2.5rem;
-        border-top: 1px solid #e5e5e5;
-        padding-top: 1rem;
+      }
+      .site-footer a {
+        color: #4b5563;
+        text-decoration: none;
+        border-bottom: 1px solid #d1d5db;
+      }
+      .site-footer a:hover {
+        color: #000000;
+        border-bottom-color: #000000;
       }
     </style>
   </head>
@@ -823,41 +811,13 @@
           <button id="btn-consent-no" type="button">no thanks</button>
         </div>
       </div>
-      <div class="hint">your choice is stored on your device.</div>
+      <div class="hint">your choice is stored on your device. <a href="/imprint/">privacy</a></div>
     </div>
 
     <!-- Imprint & privacy -->
-    <section class="impressum">
-      <h2>Imprint &amp; Privacy</h2>
-
-      <h3>Imprint</h3>
-      <p>
-        Markus Osanger<br />
-        Bürgerspitalgasse 22/35<br />
-        1060 Wien, Austria<br />
-        <a href="mailto:mosanger@gmail.com">mosanger@gmail.com</a><br />
-        responsible for the content of this page.
-      </p>
-      <p class="note">
-        the people named in the captions are characters of an unreliable narrator.
-        any resemblance to real persons is intentional but not their fault.
-      </p>
-
-      <h3>Privacy</h3>
-      <p>
-        This page uses Google Analytics 4 (Google Ireland Limited) to count visits and
-        measure which pictures are looked at. That includes page views, approximate
-        location, and device/browser information, processed by Google. This happens only
-        with your explicit consent (Art. 6 (1) (a) GDPR), which you give or refuse via the
-        banner. Your choice is stored on your device (localStorage), not in a cookie.
-      </p>
-      <p>
-        You can withdraw your consent at any time by contacting
-        <a href="mailto:mosanger@gmail.com">mosanger@gmail.com</a>. You have the right to
-        access, correct, delete and object to the processing of your data, and to lodge a
-        complaint with the Austrian data protection authority (DSB).
-      </p>
-    </section>
+    <footer class="site-footer">
+      <a href="/imprint/">imprint &amp; privacy</a>
+    </footer>
 
     <script src="js/exifreader.min.js"></script>
     <script>
