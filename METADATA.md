@@ -58,6 +58,9 @@ and the consent banner. Update it if you move or change contact info.
 
 ## Current state (2026-08-20)
 
+- Favicon: 👀 — `favicon.svg` renders the emoji as text (crisp in modern browsers);
+  PNG fallbacks derived from Noto Color Emoji (SIL OFL, transparent background).
+
 - 25 spreads, metadata embedded and matching the fallback text.
 - `[Name unknown]` (the checkered-hat hero) is **not** in the export set — export it
   as a numbered image if you want that spread back.
