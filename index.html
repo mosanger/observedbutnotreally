@@ -797,5 +797,47 @@ he's not in it.</p>
       window.addEventListener("load", adjustAllLayouts);
       window.addEventListener("resize", adjustAllLayouts);
     </script>
+
+    <script>
+      // Keyboard navigation: right/down -> next page, left/up -> previous.
+      // Pages are the cover, the quote and every spread, in document order.
+      (() => {
+        const PAGES_SELECTOR = ".cover-wrapper, .quote-page, .portfolio-pages .portfolio-page";
+
+        const isTyping = () => {
+          const el = document.activeElement;
+          if (!el) return false;
+          const tag = el.tagName;
+          return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable;
+        };
+
+        // Returns the section to scroll to. dir = 1 next, -1 previous.
+        const target = (dir) => {
+          const pages = [...document.querySelectorAll(PAGES_SELECTOR)];
+          if (!pages.length) return null;
+          const y = window.scrollY;
+          const top = (p) => p.getBoundingClientRect().top + y;
+          if (dir > 0) {
+            return pages.find((p) => top(p) > y + 40) || pages[pages.length - 1];
+          }
+          const before = pages.filter((p) => top(p) < y - 40);
+          return before.length ? before[before.length - 1] : pages[0];
+        };
+
+        window.addEventListener("keydown", (e) => {
+          if (isTyping()) return;
+          const dir =
+            e.key === "ArrowRight" || e.key === "ArrowDown" ? 1
+            : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1
+            : 0;
+          if (!dir) return;
+          e.preventDefault();
+          const el = target(dir);
+          if (el && typeof el.scrollIntoView === "function") {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
