@@ -34,15 +34,11 @@ Roughly the same flow works from any editor that writes XMP `dc:title`/`dc:descr
 
 ## Analytics (Google Analytics 4)
 
-The GA4 gtag snippet is already in `index.html`'s `<head>` with a placeholder ID
-(`G-XXXXXXXXXX`) — the site is wired up but tracks nothing until you activate it:
+Active since 2026-08-20, Measurement ID `G-C4WK9KXT0E` (gtag.js snippet in
+`index.html`'s `<head>`; fires `page_view` on load). To point at a different
+property, replace the ID in the `gtag/js?id=` URL and the `gtag('config', …)` call.
 
-1. Create/find your property at <https://analytics.google.com> → Admin → Data Streams → Web.
-2. Copy the **Measurement ID** (format `G-XXXXXXXXXX`).
-3. In `index.html`, replace **both** occurrences of `G-XXXXXXXXXX` (the `gtag/js?id=` URL and the `gtag('config', …)` call).
-4. Commit + push. Page views appear in Analytics within ~24h.
-
-Note: this is a bare page_view setup — no consent banner, no custom events. If you ever
+Note: bare page_view setup — no consent banner, no custom events. If you ever
 want scroll/spread-view events or EU consent handling, say the word.
 
 ## Current state (2026-08-20)
