@@ -134,16 +134,20 @@
           text-align: left;
         }
       }
-      .social-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
+      /* Text links (imprint style) — used for the social rows */
+      .text-link {
         color: #4b5563; /* gray-600 */
-        transition: color 0.2s;
         text-decoration: none;
+        border-bottom: 1px solid #d1d5db; /* gray-300 */
+        transition: color 0.2s;
       }
-      .social-link:hover {
+      .text-link:hover {
         color: #000000;
+        border-bottom-color: #000000;
+      }
+      .text-link + .text-link::before {
+        content: "·";
+        margin: 0 0.6rem;
       }
 
       /* Site footer (link to imprint page) */
@@ -188,54 +192,12 @@
       <div class="text-center">
         <p class="font-serif-elegant text-lg md:text-xl leading-relaxed max-w-xl">
           candid moments, reconstructed. unreliable at best,<br/>
-          improbable at worst. <br/>
-          in progress.
+          improbable at worst. <span class="block mt-10">in progress.</span>
         </p>
-        <div class="mt-8 inline-flex flex-row space-x-4">
-          <a
-            href="https://www.instagram.com/observedbutnotreally"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-6 w-6"
-            >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-          <a
-            href="https://mosanger.substack.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-6 w-6"
-            >
-              <path fill-rule="evenodd" d="M3.5,2.5 L19.5,2.5 L19.5,4.5 L3.5,4.5 Z M3.5,6.5 L19.5,6.5 L19.5,8.5 L3.5,8.5 Z M3.5,10.5 L19.5,10.5 L19.5,21.5 L11.5,16.5 L3.5,21.5 L3.5,10.5 Z"></path>
-            </svg>
-          </a>
+        <div class="mt-8">
+          <a href="https://www.instagram.com/observedbutnotreally" target="_blank" rel="noopener noreferrer" class="text-link">@observedbutnotreally</a>
+          <a href="https://mosanger.substack.com/" target="_blank" rel="noopener noreferrer" class="text-link">the process</a>
+          <a href="mailto:mosanger@gmail.com" class="text-link">contact</a>
         </div>
       </div>
     </section>
@@ -694,13 +656,8 @@ he's not in it.</p>
       <div class="text-container">
         <h2 class="font-serif-elegant text-2xl md:text-3xl mb-3">Markus</h2>
         <p class="text-sm md:text-base leading-relaxed">observing.</p>
-          <div class="mt-8 inline-flex flex-row space-x-4">
-            <a href="https://www.instagram.com/mosanger" target="_blank" rel="noopener noreferrer" class="social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </a>
-            <a href="mailto:mosanger@gmail.com" class="social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 4,6"></polyline></svg>
-            </a>
+          <div class="mt-8">
+            <a href="https://www.instagram.com/mosanger" target="_blank" rel="noopener noreferrer" class="text-link">@mosanger</a>
           </div>
       </div>
     </section>
