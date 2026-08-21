@@ -25,6 +25,16 @@
       .font-serif-elegant {
         font-family: "Playfair Display", serif;
       }
+      /* Page-based scroll snapping: cover, quote and every spread is a snap
+         point. proximity (not mandatory) so tall mobile spreads stay scrollable. */
+      html {
+        scroll-snap-type: y proximity;
+      }
+      .cover-wrapper,
+      .quote-page,
+      .portfolio-page {
+        scroll-snap-align: start;
+      }
       .cover-wrapper {
         height: 100vh;
         height: 100svh; /* mobile browsers: fit the visible viewport, not the URL-bar area */
