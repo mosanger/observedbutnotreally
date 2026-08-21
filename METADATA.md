@@ -57,8 +57,8 @@ Update it if you move or change contact info.
   Rafael & Rafael, Lena, Antonia, Fabian & Kerstin); several files renumbered and
   captions updated (Liberty, Jessy, Marla, Hans…). The HTML fallback text is
   byte-identical to the embedded metadata for all 30 files.
-- Favicon: 👀 — `favicon.svg` renders the emoji as text (crisp in modern browsers);
-  PNG fallbacks derived from Noto Color Emoji (SIL OFL, transparent background).
+- Favicon: the cover photo (crowd behind the barrier, square crop) — PNG sizes
+  16/32/192/512 + apple-touch-icon (180).
 - `[Name unknown]` (the checkered-hat hero) is **not** in the export set — export it
   as a numbered image if you want that spread back.
 - Cover (`images/cover.jpg`) is hardcoded — its title is the book title, not metadata.
