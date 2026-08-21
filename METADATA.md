@@ -32,29 +32,24 @@ Roughly the same flow works from any editor that writes XMP `dc:title`/`dc:descr
   block in `index.html`, swap the `src`. The left/right alternation is automatic —
   CSS `:nth-child(even/odd)` handles it; no class changes needed.
 
-## Analytics (Google Analytics 4)
+## Analytics (Umami Cloud)
 
-Active since 2026-08-20, Measurement ID `G-C4WK9KXT0E` (gtag.js snippet in
-`index.html`'s `<head>`). Events:
+Cookieless, privacy-first analytics — **no consent banner, no cookies, no
+localStorage**. Replaces the former GA4 + consent-banner setup (removed 2026-08-21).
 
-- `page_view` — automatic, on load.
-- `spread_view` — fired once per spread when it scrolls to ≥50% visibility
-  (IntersectionObserver). Custom parameters: `spread` (character name),
-  `spread_index` (1-based book position), `image` (filename).
-
-To see `spread`/`spread_index`/`image` in reports, register them as custom
-dimensions (Admin → Custom definitions → Create custom dimension) with event
-scope. Verify live events via DebugView. To point at a different property,
-replace the ID in the `gtag/js?id=` URL and the `gtag('config', …)` call.
-
-**Consent:** the site uses GA4 Consent Mode v2 — `analytics_storage` defaults to
-`denied` and nothing counts until the visitor clicks **ok** on the consent banner.
-The choice is stored in localStorage under `ga-consent` (`granted`/`denied`);
-the banner only shows when no choice is stored. No cookie is used.
+- Snippet in `index.html`'s `<head>`:
+  `<script defer src="https://cloud.umami.is/script.js" data-website-id="33dd6593-2199-4fd5-bb9a-765e5a76b094"></script>`
+- Page views are tracked automatically by the script.
+- `spread_view` custom event via `window.umami?.track(...)` (params: `spread`
+  character name, `spread_index` 1-based, `image` filename) — fired once per
+  spread at ≥50% visibility (IntersectionObserver).
+- Free Hobby plan: 100k events/month, 6-month retention, 1 website. Dashboard at
+  umami.is. If the free tier's event budget ever becomes a problem, self-hosting
+  is an option (MIT license).
 
 **Imprint & Privacy:** on its own page at `/imprint/` (`imprint/index.html`,
-English, address Bürgerspitalgasse 22/35, 1060 Wien), linked from the site footer
-and the consent banner. Update it if you move or change contact info.
+English, address Bürgerspitalgasse 22/35, 1060 Wien), linked from the site footer.
+Update it if you move or change contact info.
 
 ## Current state (2026-08-20)
 
