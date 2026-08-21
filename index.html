@@ -39,6 +39,7 @@
       }
       .cover-wrapper {
         height: 100vh;
+        height: 100svh; /* mobile browsers: fit the visible viewport, not the URL-bar area */
         display: flex;
         flex-direction: column;
       }
@@ -118,6 +119,19 @@
       }
       /* Responsive styles for screens smaller than 768px (tablets and phones) */
       @media (max-width: 768px) {
+        /* Cover: group photo + title into one centered unit so they don't
+           get separated by a big void; whitespace splits evenly top/bottom. */
+        .cover-wrapper {
+          height: auto;
+          min-height: 100svh;
+          justify-content: center;
+        }
+        .cover-image-container {
+          flex-grow: 0;
+        }
+        .cover-title-container {
+          transform: none;
+        }
         .portfolio-page {
           flex-direction: column;
         }
